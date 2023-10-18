@@ -37,6 +37,10 @@ public class JavaUniversity {
 
     // 2. Method that returns the average value of grades
     public static double averageGrade(int[] grades) {
+        if (grades.length == 0) {
+            throw new ArithmeticException("Division by zero: Empty grades array provided.");
+        }
+
         int sum = 0;
 
         for (int grade : grades) {
@@ -60,16 +64,11 @@ public class JavaUniversity {
     // 4. Method that returns the highest rounded grade
     public static int highestRoundedGrade(int[] grades) {
         int highest = 0;
+
         for (int grade : grades) {
             int roundedGrade = roundGrade(grade);
-
-
             if (roundedGrade > highest) {
-                // Only add grades that have been rounded
-                // Ignore grades that are higher but have not been changed
-                if (roundedGrade != grade) {
-                    highest = roundedGrade;
-                }
+                highest = roundedGrade;
             }
         }
 
