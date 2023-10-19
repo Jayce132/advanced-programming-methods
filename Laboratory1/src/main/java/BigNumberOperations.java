@@ -18,12 +18,11 @@ public class BigNumberOperations {
 
         if (carry > 0) {
             int[] newResult = new int[len + 1];
-            for (int i = 1; i < newResult.length; i++) {
-                newResult[i] = result[i - 1];
-            }
+            System.arraycopy(result, 0, newResult, 1, newResult.length - 1);
             newResult[0] = carry;
             return newResult;
         }
+
         return result;
     }
 
@@ -75,12 +74,11 @@ public class BigNumberOperations {
 
         if (carry > 0) {
             int[] newResult = new int[len + 1];
-            for (int i = 1; i < newResult.length; i++) {
-                newResult[i] = result[i - 1];
-            }
+            System.arraycopy(result, 0, newResult, 1, newResult.length - 1);
             newResult[0] = carry;
             return newResult;
         }
+
         return result;
     }
 
