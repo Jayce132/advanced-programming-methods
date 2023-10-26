@@ -2,30 +2,12 @@ package com.musicshop.model;
 
 import java.math.BigDecimal;
 
-public class Product {
-    private int productID;
+public class Product extends BaseModel<Long> {
     private String name;
     private String description;
     private BigDecimal price;
     private int quantityAvailable;
     private int categoryID;
-
-    public Product(int productID, String name, String description, BigDecimal price, int quantityAvailable, int categoryID) {
-        this.productID = productID;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.quantityAvailable = quantityAvailable;
-        this.categoryID = categoryID;
-    }
-
-    public int getProductID() {
-        return productID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
-    }
 
     public String getName() {
         return name;

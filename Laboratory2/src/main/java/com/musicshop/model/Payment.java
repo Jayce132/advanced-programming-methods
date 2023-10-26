@@ -3,28 +3,11 @@ package com.musicshop.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Payment {
-    private int paymentID;
+public class Payment extends BaseModel<Long> {
     private int orderID;
     private String paymentMethod;
     private LocalDateTime paymentDate;
     private BigDecimal amount;
-
-    public Payment(int paymentID, int orderID, String paymentMethod, LocalDateTime paymentDate, BigDecimal amount) {
-        this.paymentID = paymentID;
-        this.orderID = orderID;
-        this.paymentMethod = paymentMethod;
-        this.paymentDate = paymentDate;
-        this.amount = amount;
-    }
-
-    public int getPaymentID() {
-        return paymentID;
-    }
-
-    public void setPaymentID(int paymentID) {
-        this.paymentID = paymentID;
-    }
 
     public int getOrderID() {
         return orderID;

@@ -2,24 +2,9 @@ package com.musicshop.model;
 
 import java.time.LocalDateTime;
 
-public class Cart {
-    private int cartID;
+public class Cart extends BaseModel<Long> {
     private int customerID;
     private LocalDateTime dateCreated;
-
-    public Cart(int cartID, int customerID, LocalDateTime dateCreated) {
-        this.cartID = cartID;
-        this.customerID = customerID;
-        this.dateCreated = dateCreated;
-    }
-
-    public int getCartID() {
-        return cartID;
-    }
-
-    public void setCartID(int cartID) {
-        this.cartID = cartID;
-    }
 
     public int getCustomerID() {
         return customerID;

@@ -1,23 +1,8 @@
 package com.musicshop.model;
 
-public class Category {
-    private int categoryID;
+public class Category extends BaseModel<Long> {
     private Integer parentCategoryID;
     private String categoryName;
-
-    public Category(int categoryID, Integer parentCategoryID, String categoryName) {
-        this.categoryID = categoryID;
-        this.parentCategoryID = parentCategoryID;
-        this.categoryName = categoryName;
-    }
-
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
-    }
 
     public Integer getParentCategoryID() {
         return parentCategoryID;

@@ -1,27 +1,10 @@
 package com.musicshop.model;
 
-public class Customer {
-    private int customerID;
+public class Customer extends BaseModel<Long> {
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
-
-    public Customer(int customerID, String firstName, String lastName, String email, String phoneNumber) {
-        this.customerID = customerID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
 
     public String getFirstName() {
         return firstName;

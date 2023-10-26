@@ -1,13 +1,8 @@
 package com.musicshop.model;
 
-public class CustomerAddress {
+public class CustomerAddress extends BaseModel<Long> {
     private int customerID;
     private int addressID;
-
-    public CustomerAddress(int customerID, int addressID) {
-        this.customerID = customerID;
-        this.addressID = addressID;
-    }
 
     public int getCustomerID() {
         return customerID;

@@ -1,29 +1,11 @@
 package com.musicshop.model;
 
-public class Address {
-    private int addressID;
+public class Address extends BaseModel<Long> {
     private String street;
     private String number;
     private String postalCode;
     private String city;
     private String country;
-
-    public Address(int addressID, String street, String number, String postalCode, String city, String country) {
-        this.addressID = addressID;
-        this.street = street;
-        this.number = number;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.country = country;
-    }
-
-    public int getAddressID() {
-        return addressID;
-    }
-
-    public void setAddressID(int addressID) {
-        this.addressID = addressID;
-    }
 
     public String getStreet() {
         return street;
