@@ -3,14 +3,14 @@ package com.musicshop.model;
 import java.time.LocalDateTime;
 
 public class Order extends BaseModel<Long> {
-    private int customerID;
+    private Long customerID;
     private LocalDateTime orderDate;
 
-    public int getCustomerID() {
+    public Long getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(Long customerID) {
         this.customerID = customerID;
     }
 

@@ -3,25 +3,25 @@ package com.musicshop.model;
 import java.time.LocalDateTime;
 
 public class Review extends BaseModel<Long> {
-    private int productID;
-    private int customerID;
+    private Long productID;
+    private Long customerID;
     private int rating;
     private String comment;
     private LocalDateTime datePosted;
 
-    public int getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(Long productID) {
         this.productID = productID;
     }
 
-    public int getCustomerID() {
+    public Long getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(Long customerID) {
         this.customerID = customerID;
     }
 

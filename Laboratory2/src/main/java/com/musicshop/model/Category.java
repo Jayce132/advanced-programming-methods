@@ -1,14 +1,14 @@
 package com.musicshop.model;
 
 public class Category extends BaseModel<Long> {
-    private Integer parentCategoryID;
+    private Long parentCategoryID;
     private String categoryName;
 
-    public Integer getParentCategoryID() {
+    public Long getParentCategoryID() {
         return parentCategoryID;
     }
 
-    public void setParentCategoryID(Integer parentCategoryID) {
+    public void setParentCategoryID(Long parentCategoryID) {
         this.parentCategoryID = parentCategoryID;
     }
 

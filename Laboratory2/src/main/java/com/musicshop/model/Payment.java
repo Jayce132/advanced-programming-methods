@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Payment extends BaseModel<Long> {
-    private int orderID;
+    private Long orderID;
     private String paymentMethod;
     private LocalDateTime paymentDate;
     private BigDecimal amount;
 
-    public int getOrderID() {
+    public Long getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(Long orderID) {
         this.orderID = orderID;
     }
 

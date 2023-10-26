@@ -3,24 +3,24 @@ package com.musicshop.model;
 import java.math.BigDecimal;
 
 public class OrderDetail extends BaseModel<Long> {
-    private int orderID;
-    private int productID;
+    private Long orderID;
+    private Long productID;
     private int quantity;
     private BigDecimal priceEach;
 
-    public int getOrderID() {
+    public Long getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(Long orderID) {
         this.orderID = orderID;
     }
 
-    public int getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(Long productID) {
         this.productID = productID;
     }
 

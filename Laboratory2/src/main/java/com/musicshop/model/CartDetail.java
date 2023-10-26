@@ -1,23 +1,23 @@
 package com.musicshop.model;
 
 public class CartDetail extends BaseModel<Long> {
-    private int cartID;
-    private int productID;
+    private Long cartID;
+    private Long productID;
     private int quantity;
 
-    public int getCartID() {
+    public Long getCartID() {
         return cartID;
     }
 
-    public void setCartID(int cartID) {
+    public void setCartID(Long cartID) {
         this.cartID = cartID;
     }
 
-    public int getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(Long productID) {
         this.productID = productID;
     }
 
