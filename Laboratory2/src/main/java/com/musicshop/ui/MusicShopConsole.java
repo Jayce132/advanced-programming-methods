@@ -2,6 +2,7 @@ package com.musicshop.ui;
 
 import com.musicshop.model.*;
 import com.musicshop.repository.*;
+
 import java.util.Scanner;
 import java.util.Optional;
 
@@ -23,12 +24,14 @@ public class MusicShopConsole {
         boolean continueRunning = true;
 
         while (continueRunning) {
-            System.out.println("Welcome to the Music Shop!");
+            System.out.println("\nWelcome to the Music Shop!");
             System.out.println("1. View Products");
             System.out.println("2. Add Product to Cart");
             System.out.println("3. View Cart");
-            System.out.println("4. Checkout");
-            System.out.println("5. Exit");
+            System.out.println("4. Edit Cart Item");
+            System.out.println("5. Delete Cart Item");
+            System.out.println("6. Checkout");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
@@ -47,9 +50,15 @@ public class MusicShopConsole {
                     viewCart();
                     break;
                 case 4:
-                    checkout();
+                    editCart();
                     break;
                 case 5:
+                    deleteFromCart();
+                    break;
+                case 6:
+                    checkout();
+                    break;
+                case 7:
                     continueRunning = false;
                     break;
                 default:
@@ -70,6 +79,10 @@ public class MusicShopConsole {
         if (productOpt.isPresent()) {
             Product product = productOpt.get();
 
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter quantity: ");
+            int quantity = scanner.nextInt();
+
             if (currentCart == null) {
                 currentCart = new Cart();
                 cartRepository.save(currentCart);
@@ -78,15 +91,54 @@ public class MusicShopConsole {
             CartDetail cartDetail = new CartDetail();
             cartDetail.setCartID(currentCart.getId());
             cartDetail.setProductID(product.getId());
-            cartDetail.setQuantity(1);  // This can be enhanced to ask the user for quantity
+            cartDetail.setQuantity(quantity);
 
             cartDetailRepository.save(cartDetail);
-            System.out.println(product.getName() + " added to cart.");
-
+            System.out.println(quantity + " x " + product.getName() + " added to cart.");
         } else {
             System.out.println("Product not found.");
         }
     }
+
+    private void editCart() {
+        Scanner scanner = new Scanner(System.in);
+        viewCart();
+        System.out.print("Enter the Product ID to edit: ");
+        Long productId = scanner.nextLong();
+
+        Optional<CartDetail> cartDetailOpt = cartDetailRepository.findByCartIdAndProductId(currentCart.getId(), productId);
+        if (cartDetailOpt.isPresent()) {
+            CartDetail cartDetail = cartDetailOpt.get();
+            System.out.print("Enter the new quantity: ");
+            int newQuantity = scanner.nextInt();
+            if (newQuantity <= 0) {
+                cartDetailRepository.deleteById(cartDetail.getId());
+                System.out.println("Product removed from cart.");
+            } else {
+                cartDetail.setQuantity(newQuantity);
+                cartDetailRepository.save(cartDetail);
+                System.out.println("Cart updated.");
+            }
+        } else {
+            System.out.println("Product not found in cart.");
+        }
+    }
+
+    private void deleteFromCart() {
+        Scanner scanner = new Scanner(System.in);
+        viewCart();
+        System.out.print("Enter the Product ID to delete: ");
+        Long productId = scanner.nextLong();
+
+        Optional<CartDetail> cartDetailOpt = cartDetailRepository.findByCartIdAndProductId(currentCart.getId(), productId);
+        if (cartDetailOpt.isPresent()) {
+            cartDetailRepository.deleteById(cartDetailOpt.get().getId());
+            System.out.println("Product removed from cart.");
+        } else {
+            System.out.println("Product not found in cart.");
+        }
+    }
+
 
     private void viewCart() {
         if (currentCart == null) {
@@ -98,7 +150,7 @@ public class MusicShopConsole {
                 Optional<Product> productOpt = productRepository.findById(cartDetail.getProductID());
                 if (productOpt.isPresent()) {
                     Product product = productOpt.get();
-                    System.out.println(product.getName() + " - " + product.getPrice() + " x " + cartDetail.getQuantity());
+                    System.out.println(product.getId() + ": " + product.getName() + " - " + product.getPrice() + " x " + cartDetail.getQuantity());
                 }
             }
         }
