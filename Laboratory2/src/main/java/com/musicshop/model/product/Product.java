@@ -1,4 +1,6 @@
-package com.musicshop.model;
+package com.musicshop.model.product;
+
+import com.musicshop.model.BaseModel;
 
 import java.math.BigDecimal;
 

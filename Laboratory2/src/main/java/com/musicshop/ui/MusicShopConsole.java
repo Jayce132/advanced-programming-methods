@@ -1,7 +1,11 @@
 package com.musicshop.ui;
 
-import com.musicshop.model.*;
-import com.musicshop.repository.*;
+import com.musicshop.model.cart.Cart;
+import com.musicshop.model.cart.CartDetail;
+import com.musicshop.model.product.Product;
+import com.musicshop.repository.cart.CartDetailRepository;
+import com.musicshop.repository.cart.CartRepository;
+import com.musicshop.repository.product.ProductRepository;
 
 import java.util.Scanner;
 import java.util.Optional;

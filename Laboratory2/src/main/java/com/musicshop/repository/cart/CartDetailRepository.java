@@ -1,6 +1,7 @@
-package com.musicshop.repository;
+package com.musicshop.repository.cart;
 
-import com.musicshop.model.CartDetail;
+import com.musicshop.model.cart.CartDetail;
+import com.musicshop.repository.InMemoryBaseRepository;
 
 import java.util.Optional;
 

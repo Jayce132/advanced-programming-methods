@@ -1,4 +1,6 @@
-package com.musicshop.model;
+package com.musicshop.model.category;
+
+import com.musicshop.model.BaseModel;
 
 public class Category extends BaseModel<Long> {
     private Long parentCategoryID;

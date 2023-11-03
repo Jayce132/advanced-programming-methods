@@ -1,6 +1,7 @@
 package com.musicshop.repository;
 
-import com.musicshop.model.CartDetail;
+import com.musicshop.model.cart.CartDetail;
+import com.musicshop.repository.cart.CartDetailRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

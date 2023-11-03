@@ -1,4 +1,6 @@
-package com.musicshop.model;
+package com.musicshop.model.address;
+
+import com.musicshop.model.BaseModel;
 
 public class Address extends BaseModel<Long> {
     private String street;

@@ -1,11 +1,10 @@
 package com.musicshop;
 
-import com.musicshop.model.Cart;
-import com.musicshop.model.CartDetail;
-import com.musicshop.model.Product;
-import com.musicshop.repository.CartDetailRepository;
-import com.musicshop.repository.CartRepository;
-import com.musicshop.repository.ProductRepository;
+import com.musicshop.model.cart.Cart;
+import com.musicshop.model.product.Product;
+import com.musicshop.repository.cart.CartDetailRepository;
+import com.musicshop.repository.cart.CartRepository;
+import com.musicshop.repository.product.ProductRepository;
 import com.musicshop.ui.MusicShopConsole;
 
 import java.math.BigDecimal;
@@ -41,12 +40,12 @@ public class MusicShopApplication {
         cart1.setDateCreated(LocalDateTime.parse("2023-10-15T00:00:00"));
         cartRepository.save(cart1);
 
-        // Creating and adding cart details
-        CartDetail cartDetail1 = new CartDetail();
-        cartDetail1.setCartID(cart1.getId()); // Assuming ID is assigned upon saving
-        cartDetail1.setProductID(product2.getId()); // Assuming ID is assigned upon saving
-        cartDetail1.setQuantity(1);
-        cartDetailRepository.save(cartDetail1);
+//        // Creating and adding cart details
+//        CartDetail cartDetail1 = new CartDetail();
+//        cartDetail1.setCartID(cart1.getId()); // Assuming ID is assigned upon saving
+//        cartDetail1.setProductID(product2.getId()); // Assuming ID is assigned upon saving
+//        cartDetail1.setQuantity(1);
+//        cartDetailRepository.save(cartDetail1);
 
         MusicShopConsole console = new MusicShopConsole(productRepository, cartRepository, cartDetailRepository);
         console.start();

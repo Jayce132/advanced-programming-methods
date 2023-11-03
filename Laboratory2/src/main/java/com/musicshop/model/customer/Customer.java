@@ -1,4 +1,6 @@
-package com.musicshop.model;
+package com.musicshop.model.customer;
+
+import com.musicshop.model.BaseModel;
 
 public class Customer extends BaseModel<Long> {
     private String firstName;

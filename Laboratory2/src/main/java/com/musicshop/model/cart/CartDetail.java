@@ -1,4 +1,6 @@
-package com.musicshop.model;
+package com.musicshop.model.cart;
+
+import com.musicshop.model.BaseModel;
 
 public class CartDetail extends BaseModel<Long> {
     private Long cartID;
