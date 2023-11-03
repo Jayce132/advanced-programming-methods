@@ -1,26 +1,23 @@
 package com.musicshop.ui;
 
+import com.musicshop.controller.cart.CartController;
+import com.musicshop.controller.product.ProductController;
 import com.musicshop.model.cart.Cart;
 import com.musicshop.model.cart.CartDetail;
 import com.musicshop.model.product.Product;
-import com.musicshop.repository.cart.CartDetailRepository;
-import com.musicshop.repository.cart.CartRepository;
-import com.musicshop.repository.product.ProductRepository;
 
 import java.util.Scanner;
 import java.util.Optional;
 
 public class MusicShopConsole {
 
-    private final ProductRepository productRepository;
-    private final CartRepository cartRepository;
-    private final CartDetailRepository cartDetailRepository;
+    private final ProductController productController;
+    private final CartController cartController;
     private Cart currentCart = null;
 
-    public MusicShopConsole(ProductRepository productRepository, CartRepository cartRepository, CartDetailRepository cartDetailRepository) {
-        this.productRepository = productRepository;
-        this.cartRepository = cartRepository;
-        this.cartDetailRepository = cartDetailRepository;
+    public MusicShopConsole(ProductController productController, CartController cartController) {
+        this.productController = productController;
+        this.cartController = cartController;
     }
 
     public void start() {
@@ -73,31 +70,22 @@ public class MusicShopConsole {
     }
 
     private void viewProducts() {
-        for (Product product : productRepository.findAll()) {
+        for (Product product : productController.listAllProducts()) {
             System.out.println(product.getId() + ": " + product.getName() + " - " + product.getPrice());
         }
     }
 
     private void addToCart(Long productId) {
-        Optional<Product> productOpt = productRepository.findById(productId);
+        Optional<Product> productOpt = productController.getProductById(productId);
         if (productOpt.isPresent()) {
             Product product = productOpt.get();
-
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter quantity: ");
             int quantity = scanner.nextInt();
-
             if (currentCart == null) {
-                currentCart = new Cart();
-                cartRepository.save(currentCart);
+                currentCart = cartController.createNewCart();
             }
-
-            CartDetail cartDetail = new CartDetail();
-            cartDetail.setCartID(currentCart.getId());
-            cartDetail.setProductID(product.getId());
-            cartDetail.setQuantity(quantity);
-
-            cartDetailRepository.save(cartDetail);
+            cartController.addProductToCart(currentCart, productId, quantity);
             System.out.println(quantity + " x " + product.getName() + " added to cart.");
         } else {
             System.out.println("Product not found.");
@@ -110,17 +98,16 @@ public class MusicShopConsole {
         System.out.print("Enter the Product ID to edit: ");
         Long productId = scanner.nextLong();
 
-        Optional<CartDetail> cartDetailOpt = cartDetailRepository.findByCartIdAndProductId(currentCart.getId(), productId);
+        Optional<CartDetail> cartDetailOpt = cartController.getCartDetailByCartIdAndProductId(currentCart.getId(), productId);
         if (cartDetailOpt.isPresent()) {
             CartDetail cartDetail = cartDetailOpt.get();
             System.out.print("Enter the new quantity: ");
             int newQuantity = scanner.nextInt();
             if (newQuantity <= 0) {
-                cartDetailRepository.deleteById(cartDetail.getId());
+                cartController.deleteCartDetail(cartDetail.getId());
                 System.out.println("Product removed from cart.");
             } else {
-                cartDetail.setQuantity(newQuantity);
-                cartDetailRepository.save(cartDetail);
+                cartController.updateCartDetailQuantity(cartDetail.getId(), newQuantity);
                 System.out.println("Cart updated.");
             }
         } else {
@@ -134,24 +121,23 @@ public class MusicShopConsole {
         System.out.print("Enter the Product ID to delete: ");
         Long productId = scanner.nextLong();
 
-        Optional<CartDetail> cartDetailOpt = cartDetailRepository.findByCartIdAndProductId(currentCart.getId(), productId);
+        Optional<CartDetail> cartDetailOpt = cartController.getCartDetailByCartIdAndProductId(currentCart.getId(), productId);
         if (cartDetailOpt.isPresent()) {
-            cartDetailRepository.deleteById(cartDetailOpt.get().getId());
+            cartController.deleteCartDetail(cartDetailOpt.get().getId());
             System.out.println("Product removed from cart.");
         } else {
             System.out.println("Product not found in cart.");
         }
     }
 
-
     private void viewCart() {
         if (currentCart == null) {
             System.out.println("Your cart is empty.");
             return;
         }
-        for (CartDetail cartDetail : cartDetailRepository.findAll()) {
-            if (cartDetail.getCartID() == currentCart.getId()) {
-                Optional<Product> productOpt = productRepository.findById(cartDetail.getProductID());
+        for (CartDetail cartDetail : cartController.listAllCartDetails()) {
+            if (cartDetail.getCartID().equals(currentCart.getId())) {
+                Optional<Product> productOpt = productController.getProductById(cartDetail.getProductID());
                 if (productOpt.isPresent()) {
                     Product product = productOpt.get();
                     System.out.println(product.getId() + ": " + product.getName() + " - " + product.getPrice() + " x " + cartDetail.getQuantity());

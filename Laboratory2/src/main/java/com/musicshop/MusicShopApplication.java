@@ -1,5 +1,7 @@
 package com.musicshop;
 
+import com.musicshop.controller.cart.CartController;
+import com.musicshop.controller.product.ProductController;
 import com.musicshop.model.cart.Cart;
 import com.musicshop.model.product.Product;
 import com.musicshop.repository.cart.CartDetailRepository;
@@ -40,14 +42,10 @@ public class MusicShopApplication {
         cart1.setDateCreated(LocalDateTime.parse("2023-10-15T00:00:00"));
         cartRepository.save(cart1);
 
-//        // Creating and adding cart details
-//        CartDetail cartDetail1 = new CartDetail();
-//        cartDetail1.setCartID(cart1.getId()); // Assuming ID is assigned upon saving
-//        cartDetail1.setProductID(product2.getId()); // Assuming ID is assigned upon saving
-//        cartDetail1.setQuantity(1);
-//        cartDetailRepository.save(cartDetail1);
+        ProductController productController = new ProductController(productRepository);
+        CartController cartController = new CartController(cartRepository, cartDetailRepository);
 
-        MusicShopConsole console = new MusicShopConsole(productRepository, cartRepository, cartDetailRepository);
+        MusicShopConsole console = new MusicShopConsole(productController, cartController);
         console.start();
     }
 }
