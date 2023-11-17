@@ -21,4 +21,8 @@ public class ProductController {
     public Optional<Product> getProductById(Long productId) {
         return productRepository.findById(productId);
     }
+
+    public void updateProduct(Product product) {
+        productRepository.save(product);
+    }
 }
