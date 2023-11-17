@@ -1,5 +1,6 @@
 package com.musicshop.ui;
 
+import com.musicshop.config.ApplicationContext;
 import com.musicshop.controller.product.ProductController;
 import com.musicshop.model.product.Product;
 
@@ -11,8 +12,8 @@ public class AdminConsole {
 
     private final ProductController productController;
 
-    public AdminConsole(ProductController productController) {
-        this.productController = productController;
+    public AdminConsole(ApplicationContext context) {
+        this.productController = context.getProductController();
     }
 
     public void start() {

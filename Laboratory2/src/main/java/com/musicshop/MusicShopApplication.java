@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 
 public class MusicShopApplication {
-
     public static void main(String[] args) {
         ApplicationContext context = ApplicationContext.getInstance();
 
@@ -17,15 +16,11 @@ public class MusicShopApplication {
             System.out.println("\n\nLog in as Admin?");
             Scanner scanner = new Scanner(System.in);
 
-            // Press Enter to skip logging in
             if (!scanner.nextLine().isEmpty()) {
-                AdminConsole adminConsole = new AdminConsole(context.getProductController());
+                AdminConsole adminConsole = new AdminConsole(context);
                 adminConsole.start();
             } else {
-                MusicShopConsole console = new MusicShopConsole(
-                        context.getProductController(),
-                        context.getCartController()
-                );
+                MusicShopConsole console = new MusicShopConsole(context);
                 console.start();
             }
         }

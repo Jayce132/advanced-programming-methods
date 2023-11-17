@@ -1,7 +1,9 @@
 package com.musicshop.ui;
 
+import com.musicshop.config.ApplicationContext;
 import com.musicshop.controller.cart.CartController;
 import com.musicshop.controller.product.ProductController;
+import com.musicshop.discount.DiscountStrategy;
 import com.musicshop.model.cart.Cart;
 import com.musicshop.model.cart.CartDetail;
 import com.musicshop.model.product.Product;
@@ -13,11 +15,16 @@ public class MusicShopConsole {
 
     private final ProductController productController;
     private final CartController cartController;
+
+    private final DiscountStrategy discountStrategy;
+
     private Cart currentCart = null;
 
-    public MusicShopConsole(ProductController productController, CartController cartController) {
-        this.productController = productController;
-        this.cartController = cartController;
+
+    public MusicShopConsole(ApplicationContext context) {
+        this.productController = context.getProductController();
+        this.cartController = context.getCartController();
+        this.discountStrategy = context.getDiscountStrategy();
     }
 
     public void start() {
@@ -71,7 +78,9 @@ public class MusicShopConsole {
 
     private void viewProducts() {
         for (Product product : productController.listAllProducts()) {
-            System.out.println(product.getId() + ": " + product.getName() + " - " + product.getPrice());
+            System.out.println(product.getId() + ": " + product.getName() +
+                    " - Original Price: " + product.getPrice() +
+                    " - Discounted Price: " + discountStrategy.applyDiscount(product));
         }
     }
 

@@ -2,6 +2,8 @@ package com.musicshop.config;
 
 import com.musicshop.controller.cart.CartController;
 import com.musicshop.controller.product.ProductController;
+import com.musicshop.discount.DiscountStrategy;
+import com.musicshop.discount.PercentageDiscountStrategy;
 import com.musicshop.model.cart.Cart;
 import com.musicshop.model.product.Product;
 import com.musicshop.repository.cart.CartDetailRepository;
@@ -22,6 +24,8 @@ public class ApplicationContext {
     private final CartController cartController;
     private final ProductController productController;
 
+    private final DiscountStrategy discountStrategy;
+
     private ApplicationContext() {
         // Initialize repositories
         cartRepository = new CartRepository();
@@ -31,6 +35,9 @@ public class ApplicationContext {
         // Initialize controllers with the respective repositories
         cartController = new CartController(cartRepository, cartDetailRepository);
         productController = new ProductController(productRepository);
+
+        // Initialize discount strategy
+        discountStrategy = new PercentageDiscountStrategy(10);
 
         // Register listeners
         productController.registerProductUpdateListener(cartController);
@@ -77,6 +84,10 @@ public class ApplicationContext {
 
     public ProductController getProductController() {
         return productController;
+    }
+
+    public DiscountStrategy getDiscountStrategy() {
+        return discountStrategy;
     }
 
     // Add getters for other controllers and repositories
