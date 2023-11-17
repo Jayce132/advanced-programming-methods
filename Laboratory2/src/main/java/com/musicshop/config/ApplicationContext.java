@@ -3,6 +3,8 @@ package com.musicshop.config;
 import com.musicshop.controller.cart.CartController;
 import com.musicshop.controller.product.ProductController;
 import com.musicshop.discount.DiscountStrategy;
+import com.musicshop.discount.DiscountStrategyFactory;
+import com.musicshop.discount.DiscountType;
 import com.musicshop.discount.PercentageDiscountStrategy;
 import com.musicshop.model.cart.Cart;
 import com.musicshop.model.product.Product;
@@ -37,7 +39,7 @@ public class ApplicationContext {
         productController = new ProductController(productRepository);
 
         // Initialize discount strategy
-        discountStrategy = new PercentageDiscountStrategy(10);
+        discountStrategy = DiscountStrategyFactory.createDiscountStrategy(DiscountType.PERCENTAGE, 10);
 
         // Register listeners
         productController.registerProductUpdateListener(cartController);
