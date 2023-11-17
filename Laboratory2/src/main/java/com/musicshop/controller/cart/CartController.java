@@ -1,14 +1,17 @@
 package com.musicshop.controller.cart;
 
+import com.musicshop.event.product.ProductUpdateEvent;
+import com.musicshop.event.product.ProductUpdateListener;
 import com.musicshop.model.cart.Cart;
 import com.musicshop.model.cart.CartDetail;
+import com.musicshop.model.product.Product;
 import com.musicshop.repository.cart.CartDetailRepository;
 import com.musicshop.repository.cart.CartRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public class CartController {
+public class CartController implements ProductUpdateListener {
 
     private final CartRepository cartRepository;
     private final CartDetailRepository cartDetailRepository;
@@ -50,5 +53,17 @@ public class CartController {
 
     public void deleteCartDetail(Long cartDetailId) {
         cartDetailRepository.deleteById(cartDetailId);
+    }
+
+    @Override
+    public void onProductUpdate(ProductUpdateEvent event) {
+         Product updatedProduct = event.getUpdatedProduct();
+         List<CartDetail> allCartDetails = cartDetailRepository.findAll();
+
+         for(CartDetail cartDetail : allCartDetails) {
+             if (cartDetail.getProductID().equals(updatedProduct.getId())) {
+                 System.out.println("Product " + updatedProduct.getName() + " in your cart has been updated");
+             }
+         }
     }
 }

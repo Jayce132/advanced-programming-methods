@@ -32,6 +32,9 @@ public class ApplicationContext {
         cartController = new CartController(cartRepository, cartDetailRepository);
         productController = new ProductController(productRepository);
 
+        // Register listeners
+        productController.registerProductUpdateListener(cartController);
+
         // Initialize default data
         initializeDefaultData();
     }
