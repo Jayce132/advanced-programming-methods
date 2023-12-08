@@ -10,8 +10,8 @@ public class DiscountStrategyFactoryTest {
         DiscountStrategy percentageStrategy = DiscountStrategyFactory.createDiscountStrategy(DiscountType.PERCENTAGE, 10);
         DiscountStrategy fixedStrategy = DiscountStrategyFactory.createDiscountStrategy(DiscountType.FIXED, 50);
 
-        Assertions.assertTrue(percentageStrategy instanceof PercentageDiscountStrategy, "Should be a PercentageDiscountStrategy");
-        Assertions.assertTrue(fixedStrategy instanceof FixedAmountDiscountStrategy, "Should be a FixedAmountDiscountStrategy");
+        Assertions.assertInstanceOf(PercentageDiscountStrategy.class, percentageStrategy, "Should be a PercentageDiscountStrategy");
+        Assertions.assertInstanceOf(FixedAmountDiscountStrategy.class, fixedStrategy, "Should be a FixedAmountDiscountStrategy");
     }
 }
 

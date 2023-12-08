@@ -16,16 +16,12 @@ public class PercentageDiscountStrategy implements DiscountStrategy {
     public BigDecimal applyDiscount(Product product) {
         BigDecimal price = product.getPrice();
 
-        // Separate the whole number and fractional parts
-        BigDecimal wholePart = price.setScale(0, RoundingMode.DOWN);
-        BigDecimal fractionalPart = price.remainder(BigDecimal.ONE);
+        // Apply discount to the entire price
+        BigDecimal discountedPrice = price.multiply(BigDecimal.ONE.subtract(percent));
 
-        // Apply discount only to the whole part
-        BigDecimal discountedWholePart = wholePart.multiply(BigDecimal.ONE.subtract(percent));
+        // Round down to the nearest dollar and then add .99
+        BigDecimal finalPrice = discountedPrice.setScale(0, RoundingMode.DOWN).add(new BigDecimal("0.99"));
 
-        // Combine the discounted whole part with the original fractional part
-        return discountedWholePart.add(fractionalPart).setScale(2, RoundingMode.HALF_UP);
+        return finalPrice;
     }
 }
-
-
