@@ -44,11 +44,11 @@ public class CartDetailRepositoryTest {
 
         CartDetail cartDetail2 = new CartDetail();
         cartDetail2.setCartId(1L);
-        cartDetail2.setProductId(3L);
+        cartDetail2.setProductId(1L);
         cartDetail2.setQuantity(5);
         repository.save(cartDetail2);
 
-        Optional<CartDetail> result = repository.findByCartIdAndProductId(1L, 3L);
+        Optional<CartDetail> result = repository.findByCartIdAndProductId(1L, 1L);
         assertTrue(result.isPresent());
         assertEquals(cartDetail2.getProductId(), result.get().getProductId());
         assertEquals(cartDetail2.getQuantity(), result.get().getQuantity());

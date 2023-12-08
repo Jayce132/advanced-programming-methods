@@ -4,12 +4,15 @@ import com.musicshop.config.ApplicationContext;
 
 import com.musicshop.ui.AdminConsole;
 import com.musicshop.ui.MusicShopConsole;
+import com.musicshop.utility.DatabaseConnection;
 
 import java.util.Scanner;
 
 
 public class MusicShopApplication {
     public static void main(String[] args) {
+        // Reset the database
+        DatabaseConnection.resetDatabase();
         ApplicationContext context = ApplicationContext.getInstance();
 
         while(true) {
