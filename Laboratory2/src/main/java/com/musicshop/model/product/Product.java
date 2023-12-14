@@ -9,7 +9,7 @@ public class Product extends BaseModel<Long> {
     private String description;
     private BigDecimal price;
     private int quantityAvailable;
-    private Long categoryID;
+    private Long categoryId;
 
     public String getName() {
         return name;
@@ -43,11 +43,11 @@ public class Product extends BaseModel<Long> {
         this.quantityAvailable = quantityAvailable;
     }
 
-    public Long getCategoryID() {
-        return categoryID;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryID(Long categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

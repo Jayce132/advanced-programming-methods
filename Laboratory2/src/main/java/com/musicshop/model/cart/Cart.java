@@ -5,15 +5,15 @@ import com.musicshop.model.BaseModel;
 import java.time.LocalDateTime;
 
 public class Cart extends BaseModel<Long> {
-    private Long customerID;
+    private Long customerId;
     private LocalDateTime dateCreated;
 
-    public Long getCustomerID() {
-        return customerID;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(Long customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public LocalDateTime getDateCreated() {

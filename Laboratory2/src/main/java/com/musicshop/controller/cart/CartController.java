@@ -8,6 +8,7 @@ import com.musicshop.model.product.Product;
 import com.musicshop.repository.cart.CartDetailRepository;
 import com.musicshop.repository.cart.CartRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +24,16 @@ public class CartController implements ProductUpdateListener {
 
     public Cart createNewCart() {
         Cart cart = new Cart();
+        // Don't forget to change this
+        cart.setCustomerId(1L);
+        cart.setDateCreated(LocalDateTime.now());
         return cartRepository.save(cart);
     }
 
     public void addProductToCart(Cart cart, Long productId, int quantity) {
         CartDetail cartDetail = new CartDetail();
-        cartDetail.setCartID(cart.getId());
-        cartDetail.setProductID(productId);
+        cartDetail.setCartId(cart.getId());
+        cartDetail.setProductId(productId);
         cartDetail.setQuantity(quantity);
         cartDetailRepository.save(cartDetail);
     }
@@ -57,13 +61,13 @@ public class CartController implements ProductUpdateListener {
 
     @Override
     public void onProductUpdate(ProductUpdateEvent event) {
-         Product updatedProduct = event.getUpdatedProduct();
-         List<CartDetail> allCartDetails = cartDetailRepository.findAll();
+        Product updatedProduct = event.getUpdatedProduct();
+        List<CartDetail> allCartDetails = cartDetailRepository.findAll();
 
-         for(CartDetail cartDetail : allCartDetails) {
-             if (cartDetail.getProductID().equals(updatedProduct.getId())) {
-                 System.out.println("Product " + updatedProduct.getName() + " in your cart has been updated");
-             }
-         }
+        for (CartDetail cartDetail : allCartDetails) {
+            if (cartDetail.getProductId().equals(updatedProduct.getId())) {
+                System.out.println("Product " + updatedProduct.getName() + " in your cart has been updated");
+            }
+        }
     }
 }

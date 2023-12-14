@@ -62,7 +62,7 @@ public class ApplicationContext {
         product1.setDescription("Portable and sounds great");
         product1.setPrice(new BigDecimal("550.99"));
         product1.setQuantityAvailable(10);
-        product1.setCategoryID(2L);
+        product1.setCategoryId(2L);
         productRepository.save(product1);
 
         Product product2 = new Product();
@@ -70,12 +70,12 @@ public class ApplicationContext {
         product2.setDescription("Classic sound and look");
         product2.setPrice(new BigDecimal("649.99"));
         product2.setQuantityAvailable(8);
-        product2.setCategoryID(3L);
+        product2.setCategoryId(3L);
         productRepository.save(product2);
 
         // Creating and adding carts
         Cart cart1 = new Cart();
-        cart1.setCustomerID(2L);
+        cart1.setCustomerId(2L);
         cart1.setDateCreated(LocalDateTime.parse("2023-10-15T00:00:00"));
         cartRepository.save(cart1);
     }

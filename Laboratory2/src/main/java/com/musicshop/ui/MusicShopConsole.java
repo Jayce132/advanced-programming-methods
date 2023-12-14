@@ -145,8 +145,8 @@ public class MusicShopConsole {
             return;
         }
         for (CartDetail cartDetail : cartController.listAllCartDetails()) {
-            if (cartDetail.getCartID().equals(currentCart.getId())) {
-                Optional<Product> productOpt = productController.getProductById(cartDetail.getProductID());
+            if (cartDetail.getCartId().equals(currentCart.getId())) {
+                Optional<Product> productOpt = productController.getProductById(cartDetail.getProductId());
                 if (productOpt.isPresent()) {
                     Product product = productOpt.get();
                     System.out.println(product.getId() + ": " + product.getName() + " - " + product.getPrice() + " x " + cartDetail.getQuantity());
